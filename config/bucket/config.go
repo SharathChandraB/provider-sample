@@ -2,7 +2,7 @@
 Copyright 2021 Upbound Inc.
 */
 
-package null
+package bucket
 
 import (
 	ujconfig "github.com/upbound/upjet/pkg/config"

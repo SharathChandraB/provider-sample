@@ -15,7 +15,7 @@ import (
 
 	"github.com/upbound/upjet/pkg/terraform"
 
-	"github.com/upbound/upjet-provider-template/apis/v1beta1"
+	"github.com/SharathChandraB/provider-sample/apis/v1beta1"
 )
 
 const (
@@ -24,7 +24,16 @@ const (
 	errGetProviderConfig    = "cannot get referenced ProviderConfig"
 	errTrackUsage           = "cannot track ProviderConfig usage"
 	errExtractCredentials   = "cannot extract credentials"
-	errUnmarshalCredentials = "cannot unmarshal template credentials as JSON"
+	errUnmarshalCredentials = "cannot unmarshal sample credentials as JSON"
+
+	keyTenancy_ocid         = "tenancy_ocid"
+	keyUser_ocid            = "user_ocid"
+	keyPrivate_key          = "private_key"
+	keyPrivate_key_path     = "private_key_path"
+	keyPrivate_key_password = "private_key_password"
+	keyFingerprint          = "fingerprint"
+	keyRegion               = "region"
+	keyConfig_file_profile  = "config_file_profile"
 )
 
 // TerraformSetupBuilder builds Terraform a terraform.SetupFn function which
@@ -63,10 +72,14 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		}
 
 		// Set credentials in Terraform provider configuration.
-		/*ps.Configuration = map[string]any{
-			"username": creds["username"],
-			"password": creds["password"],
-		}*/
+		ps.Configuration = map[string]interface{}{
+			keyTenancy_ocid:     ociCreds[keyTenancy_ocid],
+			keyUser_ocid:        ociCreds[keyUser_ocid],
+			keyPrivate_key:      ociCreds[keyPrivate_key],
+			keyPrivate_key_path: ociCreds[keyPrivate_key_path],
+			keyFingerprint:      ociCreds[keyFingerprint],
+			keyRegion:           ociCreds[keyRegion],
+		}
 		return ps, nil
 	}
 }
