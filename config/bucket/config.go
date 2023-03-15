@@ -10,8 +10,9 @@ import (
 
 // Configure configures the null group
 func Configure(p *ujconfig.Provider) {
-	p.AddResourceConfigurator("null_resource", func(r *ujconfig.Resource) {
+	p.AddResourceConfigurator("oci_objectstorage_bucket", func(r *ujconfig.Resource) {
 		r.Kind = "Resource"
+		r.ShortGroup = "ObjectStorage"
 		// And other overrides.
 	})
 }
